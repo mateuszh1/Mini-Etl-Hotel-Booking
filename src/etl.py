@@ -3,7 +3,14 @@ from pathlib import Path
 
 INPUT_PATH = Path("input") / "hotel_booking.csv"
 
-df = pd.read_csv(INPUT_PATH)
+
+def load_data(file_path):
+    df = pd.read_csv(file_path)
+    return df
+
+
+
+df = load_data(INPUT_PATH)
 
 
 df.columns = (
