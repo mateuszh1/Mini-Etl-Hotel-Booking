@@ -10,17 +10,19 @@ def load_data(file_path):
 
 
 
+def standardize_column_names(df):
+    df.columns = (
+
+        df.columns
+        .str.strip()
+        .str.lower()
+        .str.replace(" ", "_")
+        .str.replace("-", "_")
+    )
+    return df
+
 df = load_data(INPUT_PATH)
-
-
-df.columns = (
-
-    df.columns
-    .str.strip()
-    .str.lower()
-    .str.replace(" ", "_")
-    .str.replace("-", "_")
-)
+df = standardize_column_names(df)
 
 print("CSV file loaded successfully!")
 
