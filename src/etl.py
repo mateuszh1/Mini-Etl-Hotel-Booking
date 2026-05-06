@@ -31,10 +31,23 @@ def get_data_quality_stats(df):
     }
     return stats
 
+def remove_duplicates(df):
+    df = df.drop_duplicates()
+    return df
+
 df = load_data(INPUT_PATH)
 df = standardize_column_names(df)
 
-stats = get_data_quality_stats(df)
+stats_before = get_data_quality_stats(df)
 
-print("CSV file loaded successfully!")
-print(stats)
+df = remove_duplicates(df)
+
+stats_after = get_data_quality_stats(df)
+
+print("CSV loaded successfully")
+print("Stats before cleaning:")
+print(stats_before)
+
+
+print("\nStats after removing duplicates:")
+print(stats_after)
