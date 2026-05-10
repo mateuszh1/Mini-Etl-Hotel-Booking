@@ -1,13 +1,20 @@
 import pandas as pd
 from pathlib import Path
 
-INPUT_PATH = Path("input") / "hotel_booking.csv"
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+INPUT_PATH = BASE_DIR / "input" / "hotel_booking.csv"
+OUTPUT_PATH = BASE_DIR / "output" / "cleaned_hotel_booking.csv"
 
 
 def load_data(file_path):
     df = pd.read_csv(file_path)
     return df
 
+def save_data(df, output_path):
+   output_path.parent.mkdir(parents=True, exist_ok=True)
+   df.to_csv(output_path, index=False)
 
 
 def standardize_column_names(df):
@@ -51,6 +58,7 @@ stats_before = get_data_quality_stats(df)
 df = remove_duplicates(df)
 
 stats_after = get_data_quality_stats(df)
+save_data(df, OUTPUT_PATH)
 
 print("CSV loaded successfully")
 print("Stats before cleaning:")
@@ -59,3 +67,4 @@ print(stats_before)
 
 print("\nStats after removing duplicates:")
 print(stats_after)
+print("\n Clean data saved to {OUTPUT_PATH}")
