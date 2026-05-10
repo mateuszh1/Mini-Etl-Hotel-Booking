@@ -35,6 +35,14 @@ def remove_duplicates(df):
     df = df.drop_duplicates()
     return df
 
+
+def handle_missing_values(df):
+    df["children"] = df["children"].fillna(0)
+    df["country"] = df["country"].fillna("Unknown")
+    df["agent"] = df["agent"].fillna(0)
+    df["company"] = df["company"].fillna(0)
+    return df
+
 df = load_data(INPUT_PATH)
 df = standardize_column_names(df)
 
